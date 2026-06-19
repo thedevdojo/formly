@@ -1,0 +1,352 @@
+@import 'tailwindcss';
+
+@source '../views';
+@source '../../app';
+@source '../../packages/devdojo/*/resources/views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+/*
+|--------------------------------------------------------------------------
+| Formly design tokens — "doodle pop"
+|--------------------------------------------------------------------------
+| A flat, light-gray canvas with heavy near-black type and one hot-pink
+| accent, decorated with hand-drawn doodles. Plus Jakarta Sans carries
+| both display and UI type — weight does the talking.
+*/
+:root {
+    color-scheme: light;
+
+    --canvas: #f5f5f2;
+    --canvas-deep: #ecece8;
+    --surface: #ffffff;
+    --elevated: #f0f0ed;
+    --ink-soft: rgba(17, 17, 16, 0.05);
+
+    --line: rgba(17, 17, 16, 0.09);
+    --line-strong: rgba(17, 17, 16, 0.17);
+
+    --ink: #111110;
+    --muted: #56565a;
+    --subtle: #97979c;
+
+    --accent: #ec1e9b;
+    --accent-hover: #c90f80;
+    --accent-fg: #fff7fc;
+    --accent-soft: rgba(236, 30, 155, 0.08);
+    --accent-line: rgba(236, 30, 155, 0.35);
+
+    --good: #1e7a44;
+    --good-soft: rgba(30, 122, 68, 0.1);
+    --warn: #b45309;
+    --warn-soft: rgba(180, 83, 9, 0.1);
+    --bad: #cc2b20;
+    --bad-soft: rgba(204, 43, 32, 0.08);
+
+    /* Dark "ink panel" used for footers / CTA bands on marketing pages. */
+    --panel: #121211;
+    --panel-elevated: #1f1f1d;
+    --panel-line: rgba(245, 245, 242, 0.12);
+    --panel-fg: #f5f5f2;
+    --panel-muted: #a3a3a0;
+}
+
+@theme inline {
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-display: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', 'Fira Code', monospace;
+
+    --color-canvas: var(--canvas);
+    --color-canvas-deep: var(--canvas-deep);
+    --color-surface: var(--surface);
+    --color-elevated: var(--elevated);
+    --color-ink-soft: var(--ink-soft);
+
+    --color-line: var(--line);
+    --color-line-strong: var(--line-strong);
+
+    --color-ink: var(--ink);
+    --color-muted: var(--muted);
+    --color-subtle: var(--subtle);
+
+    --color-accent: var(--accent);
+    --color-accent-hover: var(--accent-hover);
+    --color-accent-fg: var(--accent-fg);
+    --color-accent-soft: var(--accent-soft);
+    --color-accent-line: var(--accent-line);
+
+    --color-good: var(--good);
+    --color-good-soft: var(--good-soft);
+    --color-warn: var(--warn);
+    --color-warn-soft: var(--warn-soft);
+    --color-bad: var(--bad);
+    --color-bad-soft: var(--bad-soft);
+
+    --color-panel: var(--panel);
+    --color-panel-elevated: var(--panel-elevated);
+    --color-panel-line: var(--panel-line);
+    --color-panel-fg: var(--panel-fg);
+    --color-panel-muted: var(--panel-muted);
+}
+
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    body {
+        background-color: var(--canvas);
+        color: var(--ink);
+        font-family: var(--font-sans);
+        font-size: 0.9375rem;
+        line-height: 1.6;
+    }
+
+    ::selection {
+        background: var(--accent);
+        color: var(--accent-fg);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        border-radius: 2px;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@layer components {
+    /* ---- Buttons ------------------------------------------------------ */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        white-space: nowrap;
+        border-radius: 0.75rem;
+        font-weight: 700;
+        font-size: 0.875rem;
+        line-height: 1;
+        padding: 0.625rem 1rem;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+    }
+
+    .btn:active {
+        transform: translateY(1px);
+    }
+
+    .btn-primary {
+        background: var(--accent);
+        color: var(--accent-fg);
+        box-shadow: 0 1px 2px rgba(28, 26, 22, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+
+    .btn-primary:hover {
+        background: var(--accent-hover);
+    }
+
+    .btn-ink {
+        background: var(--ink);
+        color: var(--canvas);
+        box-shadow: 0 1px 2px rgba(28, 26, 22, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-ink:hover {
+        background: #33302a;
+    }
+
+    .btn-outline {
+        background: var(--surface);
+        border-color: var(--line-strong);
+        color: var(--ink);
+        box-shadow: 0 1px 2px rgba(28, 26, 22, 0.05);
+    }
+
+    .btn-outline:hover {
+        border-color: var(--ink);
+    }
+
+    .btn-ghost {
+        color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+        color: var(--ink);
+        background: var(--ink-soft);
+    }
+
+    .btn-danger {
+        background: var(--bad);
+        color: #fff;
+    }
+
+    .btn-danger:hover {
+        background: #8f1d17;
+    }
+
+    .btn-sm {
+        padding: 0.4375rem 0.75rem;
+        font-size: 0.8125rem;
+        border-radius: 0.5rem;
+    }
+
+    .btn-lg {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.9375rem;
+        border-radius: 0.75rem;
+    }
+
+    /* ---- Inputs ------------------------------------------------------- */
+    .input {
+        width: 100%;
+        background: var(--surface);
+        border: 1px solid var(--line-strong);
+        border-radius: 0.625rem;
+        padding: 0.5625rem 0.875rem;
+        font-size: 0.875rem;
+        color: var(--ink);
+        box-shadow: 0 1px 2px rgba(28, 26, 22, 0.04);
+        transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .input::placeholder {
+        color: var(--subtle);
+    }
+
+    .input:focus {
+        outline: none;
+        border-color: var(--ink);
+        box-shadow: 0 0 0 3px var(--ink-soft);
+    }
+
+    .label {
+        display: block;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--ink);
+        margin-bottom: 0.375rem;
+    }
+
+    /* ---- Surfaces ------------------------------------------------------ */
+    .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        box-shadow: 0 1px 2px rgba(28, 26, 22, 0.04), 0 8px 24px -12px rgba(28, 26, 22, 0.08);
+    }
+
+    .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.1875rem 0.625rem;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--muted);
+    }
+
+    .kbd {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 1.375rem;
+        height: 1.375rem;
+        padding: 0 0.3125rem;
+        border-radius: 0.375rem;
+        border: 1px solid var(--line-strong);
+        border-bottom-width: 2px;
+        background: var(--surface);
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        color: var(--muted);
+    }
+}
+
+/* Accent-colored stroke inside multi-color doodles (see <x-doodle>). */
+.doodle-accent {
+    stroke: var(--accent);
+}
+
+/* Hand-drawn pink squiggle under a word: <span class="underline-squiggle">easy</span> */
+@utility underline-squiggle {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 12' fill='none'%3E%3Cpath d='M4 8.5C20 3 30 10.5 48 7.5 64 4.8 76 3.5 106 6.5' stroke='%23ec1e9b' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 50% 98%;
+    background-size: 100% 0.16em;
+    padding-bottom: 0.14em;
+}
+
+@utility paper-grain {
+    /* Subtle paper texture for marketing surfaces. */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Editor: invisible-until-focused inputs used by the builder document. */
+@utility input-bare {
+    background: transparent;
+    border: none;
+    padding: 0;
+    width: 100%;
+    color: inherit;
+    font: inherit;
+
+    &::placeholder {
+        color: var(--subtle);
+        opacity: 0.8;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+/* Scroll-triggered reveal (paired with the IntersectionObserver in app.js). */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s cubic-bezier(0.2, 0.65, 0.25, 1), transform 0.7s cubic-bezier(0.2, 0.65, 0.25, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal].in-view {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .reveal {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Page-load reveal used on marketing pages. */
+@utility reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: formly-reveal 0.7s cubic-bezier(0.2, 0.65, 0.25, 1) forwards;
+}
+
+@keyframes formly-reveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

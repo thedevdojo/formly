@@ -1,0 +1,136 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "laravel/blank-livewire-starter-kit",
+    "type": "project",
+    "description": "The official Laravel starter kit for Livewire.",
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/devdojo/*",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "laravel/framework": "^13.7",
+        "laravel/tinker": "^3.0",
+        "livewire/livewire": "^4.1",
+        "devdojo/foundation": "*"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.24",
+        "laravel/boost": "^2.2",
+        "laravel/pail": "^1.2.5",
+        "laravel/pao": "^1.0.6",
+        "laravel/pint": "^1.27",
+        "laravel/sail": "^1.53",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.9.3",
+        "pestphp/pest": "^4.7",
+        "pestphp/pest-plugin-laravel": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan migrate --force",
+            "npm install",
+            "npm run build"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve --host=localhost\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
+        ],
+        "dev:ssr": [
+            "npm run build:ssr",
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve --host=localhost\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"php artisan inertia:start-ssr\" --names=server,queue,logs,ssr --kill-others"
+        ],
+        "lint": [
+            "pint --parallel"
+        ],
+        "lint:check": [
+            "pint --parallel --test"
+        ],
+        "ci:check": [
+            "Composer\\Config::disableProcessTimeout",
+            "@test"
+        ],
+        "test": [
+            "@php artisan config:clear --ansi",
+            "@lint:check",
+            "@php artisan test"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan boost:update --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ],
+        "pre-package-uninstall": [
+            "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "local": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php -r \"if (file_exists('composer-prod.json')) { echo 'Already in local mode.\\n'; exit(1); }\"",
+            "mv composer.json composer-prod.json",
+            "mv composer-local.json composer.json",
+            "rm -f composer.lock",
+            "composer install"
+        ],
+        "prod": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php -r \"if (file_exists('composer-local.json')) { echo 'Already in prod mode.\\n'; exit(1); }\"",
+            "mv composer.json composer-local.json",
+            "mv composer-prod.json composer.json",
+            "rm -f composer.lock",
+            "composer install"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

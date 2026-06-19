@@ -1,0 +1,21 @@
+{
+    "agents": [
+        "claude_code",
+        "kiro",
+        "zed"
+    ],
+    "cloud": false,
+    "guidelines": true,
+    "mcp": true,
+    "nightwatch": false,
+    "sail": false,
+    "skills": [
+        "folio-routing",
+        "laravel-best-practices",
+        "socialite-development",
+        "livewire-development",
+        "volt-development",
+        "pest-testing",
+        "tailwindcss-development"
+    ]
+}
