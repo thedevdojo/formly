@@ -10,11 +10,40 @@
     "license": "MIT",
     "repositories": [
         {
-            "type": "path",
-            "url": "packages/devdojo/*",
-            "options": {
-                "symlink": true
-            }
+            "type": "vcs",
+            "url": "https://github.com/thedevdojo/foundation"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/thedevdojo/auth"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/thedevdojo/billing"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/thedevdojo/components"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/thedevdojo/blog"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/thedevdojo/changelog"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/thedevdojo/notifications"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/thedevdojo/accounts"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/thedevdojo/teams"
         }
     ],
     "require": {
