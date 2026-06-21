@@ -1,8 +1,3 @@
-@props(['class' => 'size-8'])
+@props(['class' => 'size-7'])
 
-<svg {{ $attributes->merge(['class' => $class]) }} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="32" height="32" rx="9" fill="var(--ink)"/>
-    <rect x="11" y="8" width="4.5" height="16" rx="2.25" fill="var(--canvas)"/>
-    <rect x="11" y="8" width="11.5" height="4.5" rx="2.25" fill="var(--canvas)"/>
-    <rect x="11" y="15" width="8.5" height="4.5" rx="2.25" fill="var(--accent)"/>
-</svg>
+<svg {{ $attributes->merge(['class' => $class]) }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 116 116"><path fill="#000" d="M86 0c16.569 0 30 13.432 30 30v56c0 16.569-13.431 30-30 30H30c-16.568 0-30-13.431-30-30V30C0 13.432 13.432 0 30 0zM52.8 52.5c-6.8.4-18.6 5.6-18.6 16.7v16.2c.4 7.7 6.2 8.6 9.3 8.6s7.9-2 8.4-7.1V70.2c0-2.1 1-1.7 2.1-1.7h9c4 0 8-3.2 7.8-7.8 0-4.4-3.5-7.8-6.8-8.2zM43.6 20c-4.5.1-9.6 3.7-9.6 9.1v27.6c2.9-6.6 10-9.6 17.8-10.1v-8.5c0-.8.7-1.1 1.5-1.2l22.5.2c4 0 8.9-3.5 9.1-8.5S81.2 20.4 77 20z"/></svg>
